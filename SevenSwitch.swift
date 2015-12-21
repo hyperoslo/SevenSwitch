@@ -258,7 +258,7 @@ let uiswitchFrame = CGRect(x: 0, y: 0, width: 51, height: 31)
     private var isAnimating: Bool = false
     private var userDidSpecifyOnThumbTintColor: Bool = false
     private var switchValue: Bool = false
-    var knobSize: CGSize = CGSize.zeroSize
+    var knobSize: CGSize = CGSize.zero
 
     
     /*
@@ -268,7 +268,7 @@ let uiswitchFrame = CGRect(x: 0, y: 0, width: 51, height: 31)
         self.init(frame: uiswitchFrame)
     }
     
-    required public init(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
         self.setup()
@@ -353,7 +353,7 @@ let uiswitchFrame = CGRect(x: 0, y: 0, width: 51, height: 31)
         self.on = false
     }
     
-    override public func beginTrackingWithTouch(touch: UITouch, withEvent event: UIEvent) -> Bool {
+    override public func beginTrackingWithTouch(touch: UITouch, withEvent event: UIEvent?) -> Bool {
         super.beginTrackingWithTouch(touch, withEvent: event)
         
         startTrackingValue = self.on
@@ -362,7 +362,7 @@ let uiswitchFrame = CGRect(x: 0, y: 0, width: 51, height: 31)
         let activeKnobWidth = knobSize.width + 5
         isAnimating = true
         
-        UIView.animateWithDuration(0.3, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut | UIViewAnimationOptions.BeginFromCurrentState, animations: {
+        UIView.animateWithDuration(0.3, delay: 0.0, options: [UIViewAnimationOptions.CurveEaseOut, UIViewAnimationOptions.BeginFromCurrentState], animations: {
                 if self.on {
                     self.thumbView.frame = CGRectMake(self.bounds.size.width - (activeKnobWidth + self.knobMargin), self.thumbView.frame.origin.y, activeKnobWidth, self.thumbView.frame.size.height)
                     self.backgroundView.backgroundColor = self.onTintColor
@@ -380,7 +380,7 @@ let uiswitchFrame = CGRect(x: 0, y: 0, width: 51, height: 31)
         return true
     }
     
-    override public func continueTrackingWithTouch(touch: UITouch, withEvent event: UIEvent) -> Bool {
+    override public func continueTrackingWithTouch(touch: UITouch, withEvent event: UIEvent?) -> Bool {
         super.continueTrackingWithTouch(touch, withEvent: event)
 
         if !isAnimating {
@@ -406,7 +406,7 @@ let uiswitchFrame = CGRect(x: 0, y: 0, width: 51, height: 31)
         return true
     }
     
-    override public func endTrackingWithTouch(touch: UITouch, withEvent event: UIEvent) {
+    override public func endTrackingWithTouch(touch: UITouch?, withEvent event: UIEvent?) {
         super.endTrackingWithTouch(touch, withEvent: event)
 
         let previousValue = self.on
@@ -509,7 +509,7 @@ let uiswitchFrame = CGRect(x: 0, y: 0, width: 51, height: 31)
         let activeKnobWidth = normalKnobWidth + 5
         if animated {
             isAnimating = true
-            UIView.animateWithDuration(0.3, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut | UIViewAnimationOptions.BeginFromCurrentState, animations: {
+            UIView.animateWithDuration(0.3, delay: 0.0, options: [UIViewAnimationOptions.CurveEaseOut, UIViewAnimationOptions.BeginFromCurrentState], animations: {
                 if self.tracking {
                     self.thumbView.frame = CGRectMake(self.bounds.size.width - (activeKnobWidth + self.knobMargin), self.thumbView.frame.origin.y, activeKnobWidth, self.thumbView.frame.size.height)
                 }
@@ -560,7 +560,7 @@ let uiswitchFrame = CGRect(x: 0, y: 0, width: 51, height: 31)
         
         if animated {
             isAnimating = true
-            UIView.animateWithDuration(0.3, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut | UIViewAnimationOptions.BeginFromCurrentState, animations: {
+            UIView.animateWithDuration(0.3, delay: 0.0, options: [UIViewAnimationOptions.CurveEaseOut, UIViewAnimationOptions.BeginFromCurrentState], animations: {
                 if self.tracking {
                     self.thumbView.frame = CGRectMake(self.knobMargin, self.thumbView.frame.origin.y, activeKnobWidth, self.thumbView.frame.size.height);
                     self.backgroundView.backgroundColor = self.activeColor

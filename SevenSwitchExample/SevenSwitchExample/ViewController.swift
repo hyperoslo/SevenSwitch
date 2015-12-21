@@ -56,7 +56,7 @@ class ViewController: UIViewController {
     
     // Text Switch example
     let size = CGSize (width: 247, height: 50)
-    let frame = CGRect(origin: CGPoint.zeroPoint, size: size)
+    let frame = CGRect(origin: CGPoint.zero, size: size)
     let myTextSwitch = SevenSwitch(frame: frame)
     myTextSwitch.center = CGPointMake(self.view.bounds.size.width * 0.5, self.view.bounds.size.height * 0.5 + 150)
     myTextSwitch.addTarget(self, action: "switchChanged:", forControlEvents: UIControlEvents.ValueChanged)
@@ -72,6 +72,6 @@ class ViewController: UIViewController {
   }
   
   func switchChanged(sender: SevenSwitch) {
-    println("Changed value to: \(sender.on)")
+    print("Changed value to: \(sender.on)")
   }
 }
